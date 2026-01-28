@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrusel 9:16</title>
+
+  <!-- Swiper (CDN) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <style>
+    :root{
+      --radius: 18px;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: transparent;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Wrapper responsivo: mantiene 9:16 */
+    .frame {
+      width: min(420px, 100%);
+      aspect-ratio: 9 / 16;
+      margin: 0 auto;
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #000; /* por si hay imágenes con bordes */
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* llena el 9:16 */
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* Flechas */
+    .swiper-button-next, .swiper-button-prev {
+      color: #fff;
+      opacity: 0.9;
+      text-shadow: 0 2px 12px rgba(0,0,0,.6);
+    }
+
+    /* Dots */
+    .swiper-pagination-bullet {
+      background: #fff;
+      opacity: 0.55;
+    }
+    .swiper-pagination-bullet-active {
+      opacity: 1;
+    }
+
+    /* Mini etiqueta opcional (contador) */
+    .counter {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      z-index: 5;
+      backdrop-filter: blur(6px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="frame">
+    <div class="counter" id="counter">1 / 21</div>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <!-- 21 slides -->
+        <div class="swiper-slide"><img src="assets/img/01.jpg" alt="Slide 1"></div>
+        <div class="swiper-slide"><img src="assets/img/02.jpg" alt="Slide 2"></div>
+        <div class="swiper-slide"><img src="assets/img/03.jpg" alt="Slide 3"></div>
+        <div class="swiper-slide"><img src="assets/img/04.jpg" alt="Slide 4"></div>
+        <div class="swiper-slide"><img src="assets/img/05.jpg" alt="Slide 5"></div>
+        <div class="swiper-slide"><img src="assets/img/06.jpg" alt="Slide 6"></div>
+        <div class="swiper-slide"><img src="assets/img/07.jpg" alt="Slide 7"></div>
+        <div class="swiper-slide"><img src="assets/img/08.jpg" alt="Slide 8"></div>
+        <div class="swiper-slide"><img src="assets/img/09.jpg" alt="Slide 9"></div>
+        <div class="swiper-slide"><img src="assets/img/10.jpg" alt="Slide 10"></div>
+        <div class="swiper-slide"><img src="assets/img/11.jpg" alt="Slide 11"></div>
+        <div class="swiper-slide"><img src="assets/img/12.jpg" alt="Slide 12"></div>
+        <div class="swiper-slide"><img src="assets/img/13.jpg" alt="Slide 13"></div>
+        <div class="swiper-slide"><img src="assets/img/14.jpg" alt="Slide 14"></div>
+        <div class="swiper-slide"><img src="assets/img/15.jpg" alt="Slide 15"></div>
+        <div class="swiper-slide"><img src="assets/img/16.jpg" alt="Slide 16"></div>
+        <div class="swiper-slide"><img src="assets/img/17.jpg" alt="Slide 17"></div>
+        <div class="swiper-slide"><img src="assets/img/18.jpg" alt="Slide 18"></div>
+        <div class="swiper-slide"><img src="assets/img/19.jpg" alt="Slide 19"></div>
+        <div class="swiper-slide"><img src="assets/img/20.jpg" alt="Slide 20"></div>
+        <div class="swiper-slide"><img src="assets/img/21.jpg" alt="Slide 21"></div>
+      </div>
+
+      <!-- Controles -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const totalSlides = 21;
+    const counter = document.getElementById("counter");
+
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      speed: 500,
+      centeredSlides: true,
+
+      autoplay: {
+        delay: 2200,              // velocidad del autoplay
+        disableOnInteraction: false
+      },
+
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+
+      on: {
+        slideChange: function () {
+          // realIndex ignora clones de loop (0..20)
+          const current = (this.realIndex + 1);
+          counter.textContent = `${current} / ${totalSlides}`;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
